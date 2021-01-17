@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <Forms>
+    <MainForm_1 Class="TCEForm" Encoding="Ascii85">(6Le?):ZUnm5.]b6Hh0?iJRIB=F[?v!YQ^Tji.SSn@2qSu[N2-T11gjNts{tfT!REIKo?-0@E2B9stQsQVzgy.K0e,*#_[d)]x.tiBL2Po.%TK90/AaE)zs!aeLC7K(BfXYOQmice!rVYmG:O8;,T/LsOlboz76m6y!xBxay#d73zY4/Hstb=.sL[-B9j}$Wl_mTl-VaC/i:}B,*d1=ub#}dY7S7,1mtrBf+4h[If=kwnbIiy-bCL)qK$dOt}q[4_B1..1N.tA)4*(@nk5Np@$5@CL^+tZoU.(-QPleMi#2RzhQb],m[lrt_4=T*;sR=Qh/,Qp;w:sqyVY#Vx:?r1:cxWMHX/{[dVY];Er1VIF4XG2kv^PeFF,gm0@ctPGSa!I9[Qj%/hXm9(-(6(q]5zNpzCqH8p7n(ZN1A*c0Q6pf^p8u:.@Csc:d)F:32hE.Lq#9McR#sh.9N5RI;}={3%3^LW{Ctgt.[T=$UAvavXZOh[o1Y#:umOc+PkVnYgYO%=cFAy!qcJ21eY3Z9rGN2%aXv:OkCnid}-1HtvPQBGtC,UX9i!i)F^]QSPnM[#pM8_kzXHlYjXl(-1,[3!P^x-w]jH:u7JRfVb!(8R8dak6FUu5!Fu5k[?ky!U64WV$mW)y+5Lu2(g0([$=inm.TryS-g),P{YPfBm3+)qGZ0^U6cprM9Ye^Uw-[upuMK^9lqeQ+NdqnLCeOp9LqkJA}5tGpQSqcxp$lj)!P!T21md@c)6:57f=C@*})o=8gtkq8/F^AK:Zrq8_</MainForm_1>
+  </Forms>
+  <CheatEntries>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"ONLINE PRACTICE"</Description>
+      <Options moManualExpandCollapse="1" moAllowManualCollapseAndExpand="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <Address/>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"Opponent Health"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"TekkenGame-Win64-Shipping.exe"+34E4B36</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"Frame Data Display"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"TekkenGame-Win64-Shipping.exe"+343D608</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"Self Health"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"TekkenGame-Win64-Shipping.exe"+34E1546</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"Timer B"</Description>
+          <VariableType>Float</VariableType>
+          <Address>"TekkenGame-Win64-Shipping.exe"+34C32EC</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>0</ID>
+          <Description>"Timer A"</Description>
+          <VariableType>Float</VariableType>
+          <Address>"TekkenGame-Win64-Shipping.exe"+34C32E8</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <LuaScript>getAutoAttachList().add("TekkenGame-Win64-Shipping.exe")
+
+addrList = getAddressList()
+rec_timerA = addrList.getMemoryRecordByDescription("Timer A")
+rec_timerB = addrList.getMemoryRecordByDescription("Timer B")
+rec_opptHP = addrList.getMemoryRecordByDescription("Opponent Health")
+rec_selfHP = addrList.getMemoryRecordByDescription("Self Health")
+rec_framDP = addrList.getMemoryRecordByDescription("Frame Data Display")
+
+HEALTH_VALUE = 175
+TIMER_VALUE = 5.044674472E-42 -- infinite, redundant since address is frozen
+
+form_show(MainForm_1)
+
+function UDF1_CEButton1Click(sender)
+  rec_timerA.Active = true
+  rec_timerB.Active = true
+  rec_opptHP.Active = true
+  rec_selfHP.Active = true
+  rec_framDP.Active = true
+
+  rec_timerA.Value = TIMER_VALUE
+  rec_timerB.Value = TIMER_VALUE
+
+  rec_opptHP.Value = HEALTH_VALUE
+  rec_selfHP.Value = HEALTH_VALUE
+  rec_framDP.Value = 2 -- 0:disabled; 1:simple; 2:detailed
+end
+
+function MainForm_1_CEButton2Click(sender)
+  rec_timerA.Active = false
+  rec_timerB.Active = false
+  rec_opptHP.Active = false
+  rec_selfHP.Active = false
+  rec_framDP.Active = false
+end
+
+</LuaScript>
+</CheatTable>
